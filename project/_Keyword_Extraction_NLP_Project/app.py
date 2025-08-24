@@ -7,11 +7,13 @@ from keybert import KeyBERT
 import jieba
 import PyPDF2
 from docx import Document
+import uuid, os
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'pdf','docx','txt'}
-key_model = KeyBERT(model='paraphrase-multilingual-MiniLM-L12-v2')
+key_model = KeyBERT()
 logging.basicConfig(
     level=logging.DEBUG,
     filename='app.log',
@@ -80,14 +82,28 @@ def upload_file():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(file_path)
                 logging.info(f'File save to {file_path}')
-                processed_text = f'File saved to {file_path}'
+                #对不同的上传文本类型做不同的处理
+                ext = os.path.splitext(file.filename)[1]  # 保留扩展名
+                filename = f"{uuid.uuid4().hex}{ext}"
+                extension = filename.rsplit('.',1)[1].lower()
+                if extension == 'pdf':
+                    extension_text = extract_text_from_pdf(file_path)
+                elif extension == 'docx':
+                    extension_text= extract_text_from_docx(file_path)
+                elif extension == 'txt':
+                    extension_text = extract_text_from_txt(file_path)
+                processed_text = process_text(extension_text)
             else:
                 flash('File type is not allowed')
                 return redirect(request.url)
         elif text:
-                processed_text = process_text()
+                processed_text = process_text(text)
                 logging.info('Text data processed.')
-                return redirect(request.url)
-        return  processed_text
+        else:
+            flash('No file or text provided!')
+            return redirect(request.url)
+        return  render_template('result.html',processed_text=processed_text)
+    return render_template('upload_form.html')
+
 if __name__ == "__main__":
     app.run(debug=True)

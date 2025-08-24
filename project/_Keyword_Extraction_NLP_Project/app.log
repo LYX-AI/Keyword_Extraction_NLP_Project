@@ -1,2 +1,9 @@
 werkzeug - WARNING -  * Debugger is active!
-werkzeug - INFO -  * Debugger PIN: 275-995-221
+werkzeug - INFO -  * Debugger PIN: 304-028-797
+werkzeug - INFO - 127.0.0.1 - - [24/Aug/2025 13:13:38] "GET / HTTP/1.1" 200 -
+root - INFO - File save to uploads\docx
+jieba - DEBUG - Building prefix dict from the default dictionary ...
+jieba - DEBUG - Loading model from cache C:\Users\lyx_3\AppData\Local\Temp\jieba.cache
+jieba - DEBUG - Loading model cost 0.721 seconds.
+jieba - DEBUG - Prefix dict has been built successfully.
+werkzeug - INFO - 127.0.0.1 - - [24/Aug/2025 13:13:48] "POST / HTTP/1.1" 200 -

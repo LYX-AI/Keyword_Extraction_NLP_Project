@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extraction Results</title>
+     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa; /* Light grey background */
+            font-family: 'Roboto', sans-serif; /* Simple and elegant font */
+        }
+        .container {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            background-color: #fff; /* White background */
+            padding: 20px;
+            width: 90%; /* Increased width to make the container wider */
+            max-width: 1200px; /* Set a larger max width */
+        }
+        .header {
+            background-color: #007bff; /* Bootstrap primary blue */
+            color: #fff;
+            padding: 10px 15px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            margin: -20px -20px 20px -20px;
+            text-align: center;
+        }
+        .success-message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .success-icon {
+            text-align: center;
+            font-size: 48px; /* Larger size for better visibility */
+            margin-bottom: 20px;
+        }
+                .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Centers the keywords container */
+            margin-bottom: 10px; /* Reduced bottom margin */
+        }
+
+        .keyword {
+            flex: 0 0 45%; /* Maintains width at 45% for each keyword block */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Right-aligns the left column */
+            margin: 5px 1%; /* Reduces vertical spacing between keywords */
+            padding-right: 20px; /* Right padding for the left column */
+        }
+
+        .keyword:nth-child(odd) {
+            justify-content: flex-end;
+        }
+
+        .keyword:nth-child(even) {
+            justify-content: flex-start; /* Left-aligns the right column */
+            padding-left: 20px; /* Left padding for the right column */
+        }
+
+        .related-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            width: 60%; /* Width of Go Back button */
+            margin: 20px auto; /* Centers the button */
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class = 'container'>
+        <div class="header">
+            <h1>Keyword Extraction Results</h1>
+        </div>
+        <div class="success-icon">🎉</div>
+        <div class="success-message">Keywords successfully extracted! See results below:</div>
+        <div class="keywords">
+            {% for keyword in processed_text.split(' ') %}
+                <div class="keyword"><span>{{keyword.capitalize()}}<span class="keyword-icon">🔑</span></span></span></div>
+            {% endfor %}
+        </div>
+         <a href="/" class="btn btn-primary btn-back">Go Back</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.5/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
